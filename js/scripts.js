@@ -3,6 +3,7 @@
 function TotalCost() {
   this.tickets = {};
   this.currentId = 0;
+  this.total = 0;
 }
 
 TotalCost.prototype.addTicket = function(ticket){
@@ -22,18 +23,25 @@ TotalCost.prototype.findTicket = function(id) {
   return false;
 }
 
+TotalCost.prototype.getTotalPrice = function() {
+  for (const key in this.tickets) {
+    this.total += this.tickets[key].ticketPrice;
+  }
+  return this.total
+}
+
 // Ticket logic
 
 function Ticket(title, showTime, ticketType) {
   this.title = title;
   this.showTime = showTime;
   this.ticketType = ticketType;
+  this.ticketPrice = 0;
 }
-
 
 Ticket.prototype.getPrice = function() {
   let ticketPrice = 5;
-  if (this.age === "Adult") {
+  if (this.ticketType === "Adult") {
     ticketPrice += 5;
   }
   if (this.title === "Scream" || this.title === "Spiderman") {
@@ -42,7 +50,7 @@ Ticket.prototype.getPrice = function() {
   if (this.showTime === "Evening") {
     ticketPrice += 3;
   }
-  // return this.firstName + " " + this.lastName; calculation to determine the price
+  this.ticketPrice += ticketPrice
 };
 
 // UI
@@ -61,6 +69,8 @@ function displayTicketList(ticketsToDisplay){
   ticketList.html(htmlForTicketList);
 }
 
+
+
 $(document).ready(function(){
   $("#form").submit(function(event){
     event.preventDefault();
@@ -76,5 +86,7 @@ $(document).ready(function(){
     $("#title").val("");
     $("#show-time").val("");
     $("#age-group").val("");
+    newTicket.getPrice();
+    console.log(totalCost.getTotalPrice());
   })
 })
