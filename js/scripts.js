@@ -5,9 +5,9 @@ function TotalCost() {
   this.currentId = 0;
 }
 
-Cost.prototype.addTicket = function(ticket){
+TotalCost.prototype.addTicket = function(ticket){
   ticket.id = this.assignId();
-  this.tickets[ticket.id] = ticket
+  this.tickets[ticket.id] = ticket;
 }
 
 TotalCost.prototype.assignId = function() {
@@ -15,8 +15,14 @@ TotalCost.prototype.assignId = function() {
   return this.currentId;
 };
 
+TotalCost.prototype.findTicket = function(id) {
+  if (this.tickets[id] != undefined) {
+    return this.tickets[id]
+  }
+  return false;
+}
 
-// Movie logic
+// Ticket logic
 
 function Ticket(title, showTime, ticketType) {
   this.title = title;
@@ -30,13 +36,35 @@ function Ticket(title, showTime, ticketType) {
 // };
 
 // UI
+
+// add delete button if enough time
+
 let totalCost = new TotalCost();
+
+function displayTicketList(ticketsToDisplay){
+  let ticketList = $("ul#ticket-sheet");
+  let htmlForTicketList = "";
+  Object.keys(ticketsToDisplay.tickets).forEach(function(key){
+    const ticket = ticketsToDisplay.findTicket(key);
+    htmlForTicketList += "<li>" + ticket.title + ", " + ticket.showTime + ", " + ticket.ticketType + "</li>";
+  })
+  ticketList.html(htmlForTicketList);
+}
 
 $(document).ready(function(){
   $("#form").submit(function(event){
     event.preventDefault();
 
-
+    const inputMovieTitle = $("#title").val();
+    const inputShowTime = $("#show-time").val();
+    const inputAge = $("#age-group").val();
     
+    let newTicket = new Ticket(inputMovieTitle, inputShowTime, inputAge);
+    totalCost.addTicket(newTicket);
+    displayTicketList(totalCost);
+    $("#output").show();
+    $("#title").val("");
+    $("#show-time").val("");
+    $("#age-group").val("");
   })
 })

@@ -10,33 +10,39 @@
 <body>
   <div class="container">
     <h4>Welcome to the Boxoffice</h4>
-    <form>
-      <div class="form-group">
-        <label for="title">Select your movie:</label>
-        <select name="title" id="title">
-          <option value="star-wars">Star Wars</option>
-          <option value="spiderman">Spiderman</option>
-          <option value="scream">Scream</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="show-time">Select your Showtime:</label>
-        <select name="show-time" id="show-time">
-          <option value="matinee">3 PM</option>
-          <option value="evening">7 PM</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="age-group">Select your agegroup:</label>
-        <select name="age-group" id="age-group">
-          <option value="child">12 and under</option>
-          <option value="adult">Above 12</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Get your tickets!</button>
-    </form>
+    <div id="input">
+      <form id="form">
+        <div class="form-group">
+          <label for="title">Select your movie:</label>
+          <select name="title" id="title" required>
+            <option value="">--</option>
+            <option value="Star Wars">Star Wars</option>
+            <option value="Spiderman">Spiderman</option>
+            <option value="Scream">Scream</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="show-time">Select your Showtime:</label>
+          <select name="show-time" id="show-time" required>
+            <option value="">--</option>
+            <option value="Matinee">3 PM</option>
+            <option value="Evening">7 PM</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="age-group">Select your agegroup:</label>
+          <select name="age-group" id="age-group" required>
+            <option value="">--</option>
+            <option value="Child">12 and under</option>
+            <option value="Adult">Above 12</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add ticket</button>
+      </form>
+    </div>
     <div id="output">
-      <ul>
+      <h5>Your tickets:</h5>
+      <ul id="ticket-sheet">
 
       </ul>
     </div>
