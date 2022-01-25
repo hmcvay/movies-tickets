@@ -31,9 +31,19 @@ function Ticket(title, showTime, ticketType) {
 }
 
 
-// Ticket.prototype.getPrice = function() {
-//   // return this.firstName + " " + this.lastName; calculation to determine the price
-// };
+Ticket.prototype.getPrice = function() {
+  let ticketPrice = 5;
+  if (this.age === "Adult") {
+    ticketPrice += 5;
+  }
+  if (this.title === "Scream" || this.title === "Spiderman") {
+    ticketPrice += 5;
+  }
+  if (this.showTime === "Evening") {
+    ticketPrice += 3;
+  }
+  // return this.firstName + " " + this.lastName; calculation to determine the price
+};
 
 // UI
 
