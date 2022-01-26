@@ -24,10 +24,13 @@ TotalCost.prototype.findTicket = function(id) {
 }
 
 TotalCost.prototype.getTotalPrice = function() {
-  for (const key in this.tickets) {
+  Object.keys(this.tickets).forEach(function(key) {
     this.total += this.tickets[key].ticketPrice;
-  }
-  return this.total
+  });
+  // for (const key in this.tickets) {
+  //   this.total += this.tickets[key].ticketPrice;
+  // }
+  return this.total;
 }
 
 // Ticket logic
@@ -50,7 +53,7 @@ Ticket.prototype.getPrice = function() {
   if (this.showTime === "Evening") {
     ticketPrice += 3;
   }
-  this.ticketPrice += ticketPrice
+  this.ticketPrice = ticketPrice
 };
 
 // UI
@@ -69,8 +72,6 @@ function displayTicketList(ticketsToDisplay){
   ticketList.html(htmlForTicketList);
 }
 
-
-
 $(document).ready(function(){
   $("#form").submit(function(event){
     event.preventDefault();
@@ -87,6 +88,6 @@ $(document).ready(function(){
     $("#show-time").val("");
     $("#age-group").val("");
     newTicket.getPrice();
-    console.log(totalCost.getTotalPrice());
+    $("#price-sheet").html("Your Tickets Total: $" + totalCost.getTotalPrice())
   })
 })
